@@ -8,6 +8,7 @@ class User {
   final String gender;
   final DateTime birthDate;
   final List<Tag> favoriteTags;
+  final String picturePath;
 
   const User({
     required this.id,
@@ -17,5 +18,6 @@ class User {
     required this.gender,
     required this.birthDate,
     required this.favoriteTags,
+    required this.picturePath,
   });
 }

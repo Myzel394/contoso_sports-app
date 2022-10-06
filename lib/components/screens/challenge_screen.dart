@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../foreign_types/challenge.dart';
 import '../../foreign_types/user.dart';
 import '../widgets/challenge_item.dart';
+import '../widgets/profile_bar.dart';
 
 final List<Challenge> CHALLENGES = [
   Challenge(
@@ -23,6 +24,7 @@ final List<Challenge> CHALLENGES = [
       id: "abc",
       lastName: "Schmitt",
       nickname: "Eydam",
+      picturePath: "",
     ),
   ),
   Challenge(
@@ -42,7 +44,31 @@ final List<Challenge> CHALLENGES = [
       id: "abc",
       lastName: "Schmitt",
       nickname: "Eydam",
+      picturePath: "",
     ),
+  ),
+];
+
+final List<User> LEADERBOARD = [
+  User(
+    birthDate: DateTime.now(),
+    favoriteTags: [],
+    firstName: "Aaron",
+    gender: "M",
+    id: "abc",
+    lastName: "Schmitt",
+    nickname: "Eydam",
+    picturePath: "assets/images/erik.jpg",
+  ),
+  User(
+    birthDate: DateTime.now(),
+    favoriteTags: [],
+    firstName: "Howard",
+    gender: "M",
+    id: "abcd",
+    lastName: "Wollowitz",
+    nickname: "Eydam",
+    picturePath: "assets/images/omid.jpg",
   ),
 ];
 
@@ -93,18 +119,44 @@ class _ChallengeScreenState extends State<ChallengeScreen> {
                 ),
         ],
       ),
-      body: Align(
-        child: ListView(
-          scrollDirection: Axis.horizontal,
-          shrinkWrap: true,
-          children: CHALLENGES
-              .map(
-                (element) => Align(
-                    child: ChallengeItem(
-                        challenge: element, key: Key(element.id))),
-              )
-              .toList(),
-        ),
+      body: Column(
+        children: [
+          SizedBox(
+            height: 500,
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              shrinkWrap: true,
+              children: CHALLENGES
+                  .map(
+                    (element) => Align(
+                      child: ChallengeItem(
+                        challenge: element,
+                        key: Key(element.id),
+                      ),
+                    ),
+                  )
+                  .toList(),
+            ),
+          ),
+          Text(
+            "Global Leaderboard",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 24,
+            ),
+          ),
+          const SizedBox(height: 8),
+          Column(
+            children: List<Widget>.from(
+              LEADERBOARD.map(
+                (element) => ProfileBar(
+                  user: element,
+                  key: Key(element.id),
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

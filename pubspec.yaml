@@ -37,6 +37,7 @@ dependencies:
   flutter_platform_widgets: ^2.0.0
   http: ^0.13.5
   flutter_local_notifications: ^12.0.0
+  avatar_view: ^1.0.1
 
 dev_dependencies:
   flutter_test:
@@ -67,6 +68,8 @@ flutter:
 
   assets:
     - assets/images/run.jpg
+    - assets/images/erik.jpg
+    - assets/images/omid.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
