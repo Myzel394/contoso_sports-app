@@ -11,6 +11,7 @@ class Challenge {
   final User user;
   final int difficulty;
   final int points;
+  final String? imagePath;
 
   const Challenge({
     required this.id,
@@ -22,5 +23,6 @@ class Challenge {
     required this.user,
     required this.difficulty,
     required this.points,
+    this.imagePath,
   });
 }

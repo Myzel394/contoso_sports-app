@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../api/hello.dart';
 import '../../foreign_types/challenge.dart';
 import '../../foreign_types/user.dart';
 import '../widgets/challenge_item.dart';
@@ -14,6 +13,26 @@ final List<Challenge> CHALLENGES = [
     startDate: DateTime.now(),
     endDate: DateTime.now().add(Duration(days: 2)),
     points: 500,
+    tags: [],
+    imagePath: "assets/images/run.jpg",
+    user: User(
+      birthDate: DateTime.now(),
+      favoriteTags: [],
+      firstName: "Aaron",
+      gender: "M",
+      id: "abc",
+      lastName: "Schmitt",
+      nickname: "Eydam",
+    ),
+  ),
+  Challenge(
+    id: "abcddd",
+    description: "Be silent for a day",
+    title: "I'm speechless",
+    difficulty: 10,
+    startDate: DateTime.now(),
+    endDate: DateTime.now().add(Duration(days: 4)),
+    points: 50,
     tags: [],
     user: User(
       birthDate: DateTime.now(),
@@ -63,7 +82,6 @@ class _ChallengeScreenState extends State<ChallengeScreen> {
                       isSearching = false;
                     });
 
-                    hello(searchController.text);
                     searchController.text = "";
                   },
                 )
@@ -75,12 +93,18 @@ class _ChallengeScreenState extends State<ChallengeScreen> {
                 ),
         ],
       ),
-      body: ListView(
-        children: CHALLENGES
-            .map(
-              (challenge) => ChallengeItem(challenge: challenge),
-            )
-            .toList(),
+      body: Align(
+        child: ListView(
+          scrollDirection: Axis.horizontal,
+          shrinkWrap: true,
+          children: CHALLENGES
+              .map(
+                (element) => Align(
+                    child: ChallengeItem(
+                        challenge: element, key: Key(element.id))),
+              )
+              .toList(),
+        ),
       ),
     );
   }

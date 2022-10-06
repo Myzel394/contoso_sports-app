@@ -1,8 +1,8 @@
+import 'package:contoso_sports/utils/show_notification.dart';
+import 'package:contoso_sports/utils/theme.dart';
 import 'package:flutter/material.dart';
 
 import '../../foreign_types/challenge.dart';
-import '../../utils/theme.dart';
-import 'element_tag.dart';
 
 const DIFFICULTY_COLOR_MAP = {
   0: Colors.green,
@@ -25,109 +25,125 @@ class ChallengeItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: EdgeInsets.all(15),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10.0),
-      ),
-      elevation: 5,
-      child: Container(
-        margin: EdgeInsets.all(10),
-        child: Column(
-          children: [
-            Row(
-              children: [
-                Expanded(
-                  flex: 2,
-                  child: Center(
-                    child: Text(
-                      challenge.difficulty.toString(),
-                      style: TextStyle(
-                        color: DIFFICULTY_COLOR_MAP[challenge.difficulty],
-                        fontSize: 26,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+    return GestureDetector(
+      onTap: () {
+        showNotification(
+            'Challenge: ${challenge.title}', challenge.description);
+      },
+      child: Card(
+        margin: EdgeInsets.all(15),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        elevation: 5,
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              if (challenge.imagePath is String) ...[
+                SizedBox(
+                  height: 200,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(15),
+                    child: Image.asset(challenge.imagePath!),
                   ),
                 ),
-                Expanded(
-                  flex: 8,
-                  child: Container(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          challenge.title,
-                          style: getBodyTextTextStyle(context).copyWith(
-                            fontSize: 20,
-                          ),
-                        ),
-                        SizedBox(height: 4),
-                        Text(
-                          challenge.description,
-                          style: getBodyTextTextStyle(context),
-                        ),
-                        SizedBox(height: 16),
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.date_range_rounded,
-                              color: getCaptionTextStyle(context).color,
-                            ),
-                            SizedBox(width: 2),
-                            Text(
-                              challenge.startDate.toIso8601String(),
-                              style: getCaptionTextStyle(context),
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 8),
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.show_chart,
-                              color: getCaptionTextStyle(context).color,
-                            ),
-                            SizedBox(width: 2),
-                            Text(
-                              challenge.endDate.toIso8601String(),
-                              style: getCaptionTextStyle(context),
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 16),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              challenge.points.toString(),
-                              style: getBodyTextTextStyle(context).copyWith(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20,
-                              ),
-                            ),
-                            Icon(
-                              Icons.star_rounded,
-                              color: Colors.yellow,
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                )
+                const SizedBox(height: 16),
               ],
-            ),
-            Row(
-              children: List<Widget>.from(
-                challenge.tags.map(
-                  (tag) => ElementTag(
-                    tag: tag,
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    challenge.title,
+                    textAlign: TextAlign.center,
+                    style: getTitleTextStyle(context).copyWith(
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF222222),
+                      fontSize: 26,
+                    ),
                   ),
-                ),
+                  const SizedBox(height: 12),
+                  Text(
+                    challenge.description,
+                    style: getCaptionTextStyle(context).copyWith(
+                      fontSize: 16,
+                    ),
+                  ),
+                  const SizedBox(height: 22),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Icon(
+                        Icons.date_range_rounded,
+                        color: Color(0xFF666666),
+                        size: 22,
+                      ),
+                      const SizedBox(width: 4),
+                      Text(
+                        challenge.startDate.toIso8601String(),
+                        style: getCaptionTextStyle(context).copyWith(
+                          fontSize: 14,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 8),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Icon(Icons.show_chart,
+                          color: Color(0xFF666666), size: 22),
+                      const SizedBox(width: 4),
+                      Text(
+                        challenge.endDate.toIso8601String(),
+                        style: getCaptionTextStyle(context).copyWith(
+                          fontSize: 14,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 16),
+                ],
               ),
-            )
-          ],
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Row(
+                    children: <Widget>[
+                      Icon(
+                        Icons.ac_unit,
+                        color: DIFFICULTY_COLOR_MAP[challenge.difficulty],
+                      ),
+                      const SizedBox(width: 2),
+                      Text(
+                        challenge.difficulty.toString(),
+                        style: TextStyle(
+                          color: DIFFICULTY_COLOR_MAP[challenge.difficulty],
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(width: 16),
+                  Row(
+                    children: <Widget>[
+                      Text(
+                        challenge.points.toString(),
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                        ),
+                      ),
+                      const SizedBox(width: 2),
+                      Icon(Icons.star_rounded, color: Color(0xFFFFD300)),
+                    ],
+                  ),
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );
