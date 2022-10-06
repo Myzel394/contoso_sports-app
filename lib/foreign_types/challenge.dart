@@ -25,4 +25,28 @@ class Challenge {
     required this.points,
     this.imagePath,
   });
+
+  static Challenge fromJSON(content) {
+    return Challenge(
+      id: content["id"],
+      startDate: DateTime.parse(content["startDate"]),
+      endDate: DateTime.parse(content["endDate"]),
+      title: content["title"],
+      tags: [],
+      description: content["description"],
+      difficulty: int.parse(content["difficulty"]),
+      points: content["points"],
+      imagePath: "",
+      user: User(
+        birthDate: DateTime.now(),
+        favoriteTags: [],
+        firstName: "Aaron",
+        gender: "M",
+        id: "abc",
+        lastName: "Schmitt",
+        nickname: "Eydam",
+        picturePath: "",
+      ),
+    );
+  }
 }

@@ -41,7 +41,8 @@ class ChallengeItem extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              if (challenge.imagePath is String) ...[
+              if (challenge.imagePath is String &&
+                  challenge.imagePath != "") ...[
                 SizedBox(
                   height: 200,
                   child: ClipRRect(

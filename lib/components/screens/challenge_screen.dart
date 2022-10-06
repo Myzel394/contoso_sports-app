@@ -1,4 +1,8 @@
+import 'package:contoso_sports/api/get-challenges.dart';
+import 'package:contoso_sports/components/widgets/add_form.dart';
+import 'package:contoso_sports/components/widgets/modal_sheet.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 import '../../foreign_types/challenge.dart';
 import '../../foreign_types/user.dart';
@@ -81,7 +85,33 @@ class ChallengeScreen extends StatefulWidget {
 
 class _ChallengeScreenState extends State<ChallengeScreen> {
   bool isSearching = false;
-  final TextEditingController searchController = TextEditingController();
+  final TextEditingController searchController = TextEditingController(
+    text: "",
+  );
+  final List<Challenge> challenges = [];
+
+  @override
+  void initState() {
+    super.initState();
+
+    searchController.addListener(() {
+      queryChallenges();
+    });
+
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {});
+
+    queryChallenges();
+  }
+
+  void queryChallenges() async {
+    final result = await getChallenges(searchController.text);
+
+    setState(() {
+      challenges.clear();
+
+      challenges.addAll(result);
+    });
+  }
 
   @override
   void dispose() {
@@ -119,44 +149,87 @@ class _ChallengeScreenState extends State<ChallengeScreen> {
                 ),
         ],
       ),
-      body: Column(
-        children: [
-          SizedBox(
-            height: 500,
-            child: ListView(
-              scrollDirection: Axis.horizontal,
-              shrinkWrap: true,
-              children: CHALLENGES
-                  .map(
-                    (element) => Align(
-                      child: ChallengeItem(
-                        challenge: element,
-                        key: Key(element.id),
+      bottomNavigationBar: BottomNavigationBar(
+        onTap: (index) {
+          if (index == 1) {
+            showPlatformModalSheet(
+              context: context,
+              builder: (buildContext) => ModalSheet(
+                child: AddForm(
+                  onClose: () => Navigator.pop(buildContext),
+                ),
+              ),
+            );
+          }
+        },
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.flag),
+            label: "New Challenges",
+          ),
+          BottomNavigationBarItem(
+            icon: ClipRRect(
+              borderRadius: BorderRadius.circular(5),
+              child: Container(
+                width: 40,
+                height: 40,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: NetworkImage(
+                        "https://images.unsplash.com/photo-1502101872923-d48509bff386?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&h=500&q=80"),
+                  ),
+                ),
+                child: Icon(Icons.add, color: Colors.white, size: 40),
+              ),
+            ),
+            label: "",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.account_circle),
+            label: "My Profile",
+          ),
+        ],
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            SizedBox(
+              height: 500,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                shrinkWrap: true,
+                children: challenges
+                    .map(
+                      (element) => Align(
+                        child: ChallengeItem(
+                          challenge: element,
+                          key: Key(element.id),
+                        ),
                       ),
-                    ),
-                  )
-                  .toList(),
+                    )
+                    .toList(),
+              ),
             ),
-          ),
-          Text(
-            "Global Leaderboard",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 24,
+            Text(
+              "Global Leaderboard",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 24,
+              ),
             ),
-          ),
-          const SizedBox(height: 8),
-          Column(
-            children: List<Widget>.from(
-              LEADERBOARD.map(
-                (element) => ProfileBar(
-                  user: element,
-                  key: Key(element.id),
+            const SizedBox(height: 8),
+            Column(
+              children: List<Widget>.from(
+                LEADERBOARD.map(
+                  (element) => ProfileBar(
+                    user: element,
+                    key: Key(element.id),
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
