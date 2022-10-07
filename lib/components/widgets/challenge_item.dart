@@ -1,3 +1,4 @@
+import 'package:contoso_sports/components/widgets/mark-challenge-as-completed.dart';
 import 'package:contoso_sports/utils/show_notification.dart';
 import 'package:contoso_sports/utils/theme.dart';
 import 'package:flutter/material.dart';
@@ -29,6 +30,9 @@ class ChallengeItem extends StatelessWidget {
       onTap: () {
         showNotification(
             'Challenge: ${challenge.title}', challenge.description);
+      },
+      onLongPress: () {
+        markChallengeAsCompleted(challenge.id);
       },
       child: Card(
         margin: EdgeInsets.all(15),

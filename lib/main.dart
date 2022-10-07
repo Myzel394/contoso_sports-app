@@ -34,7 +34,7 @@ void main() async {
   final userId = prefs.getString("user_id");
 
   runApp(MyApp(
-    initialRoute: userId == null ? "/login" : "/",
+    initialRoute: userId == null ? "/" : "/challenge",
   ));
 }
 
