@@ -8,22 +8,19 @@ Future<void> addChallenge(
   DateTime endDate,
   int difficulty,
   int points,
-  String imageUrl,
 ) async {
   final response = await http.post(
-    Uri.parse("https://contoso-sports.azurewebsites.net/api/HttpTrigger/" +
-        title +
-        "/" +
-        startDate.toIso8601String() +
-        "/" +
-        endDate.toIso8601String() +
-        "/" +
-        description +
-        "/" +
-        difficulty.toString() +
-        "/" +
-        points.toString() +
-        "/" +
-        imageUrl),
+    Uri.parse(
+      "https://contoso-sports-app.azurewebsites.net"
+      "/api"
+      "/challenge"
+      "/create"
+      "/$title"
+      "/${startDate.toIso8601String()}"
+      "/${endDate.toIso8601String()}"
+      "/$description"
+      "/$difficulty"
+      "/$points",
+    ),
   );
 }

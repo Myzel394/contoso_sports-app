@@ -130,7 +130,7 @@ class _ChallengeScreenState extends State<ChallengeScreen> {
             ? TextField(
                 controller: searchController,
               )
-            : Text("Challenges"),
+            : const Text("Challenges"),
         trailingActions: [
           isSearching
               ? PlatformIconButton(
@@ -176,7 +176,10 @@ class _ChallengeScreenState extends State<ChallengeScreen> {
               ),
               builder: (buildContext) => ModalSheet(
                 child: AddForm(
-                  onClose: () => Navigator.pop(buildContext),
+                  onClose: () {
+                    Navigator.pop(buildContext);
+                    queryChallenges();
+                  },
                 ),
               ),
             );

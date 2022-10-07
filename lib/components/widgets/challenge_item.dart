@@ -32,6 +32,7 @@ class ChallengeItem extends StatelessWidget {
       },
       child: Card(
         margin: EdgeInsets.all(15),
+        color: getSheetColor(context),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0),
         ),

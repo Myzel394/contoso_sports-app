@@ -1,3 +1,4 @@
+import 'package:contoso_sports/api/add-challenge.dart';
 import 'package:flutter/material.dart';
 
 import '../../utils/theme.dart';
@@ -15,6 +16,21 @@ class AddForm extends StatefulWidget {
 }
 
 class _AddFormState extends State<AddForm> {
+  final titleController = TextEditingController();
+  final descriptionController = TextEditingController();
+  final difficultyController = TextEditingController();
+  final pointsController = TextEditingController();
+
+  @override
+  void dispose() {
+    titleController.dispose();
+    descriptionController.dispose();
+    difficultyController.dispose();
+    pointsController.dispose();
+
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -24,28 +40,32 @@ class _AddFormState extends State<AddForm> {
           style: getTitleTextStyle(context),
         ),
         const SizedBox(height: 22),
-        const TextField(
+        TextField(
+          controller: titleController,
           decoration: InputDecoration(
             icon: Icon(Icons.title),
             labelText: 'Title',
           ),
         ),
         const SizedBox(height: 16),
-        const TextField(
+        TextField(
+          controller: descriptionController,
           decoration: InputDecoration(
             icon: Icon(Icons.description),
             labelText: 'Description',
           ),
         ),
         const SizedBox(height: 16),
-        const TextField(
+        TextField(
+          controller: difficultyController,
           decoration: InputDecoration(
             icon: Icon(Icons.ac_unit),
             labelText: 'Difficulty',
           ),
         ),
         const SizedBox(height: 16),
-        const TextField(
+        TextField(
+          controller: pointsController,
           decoration: InputDecoration(
             icon: Icon(Icons.star),
             labelText: 'Points',
@@ -61,7 +81,17 @@ class _AddFormState extends State<AddForm> {
             ),
             const SizedBox(width: 16),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () async {
+                await addChallenge(
+                  titleController.text,
+                  descriptionController.text,
+                  DateTime.now(),
+                  DateTime.now(),
+                  int.parse(difficultyController.text),
+                  int.parse(pointsController.text),
+                );
+                widget.onClose();
+              },
               child: const Text('Add'),
             ),
           ],
