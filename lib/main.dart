@@ -1,6 +1,8 @@
+import 'package:contoso_sports/components/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'components/screens/challenge_screen.dart';
 import 'constants/themes.dart';
@@ -28,11 +30,18 @@ void main() async {
     initializationSettings,
   );
 
-  runApp(const MyApp());
+  final prefs = await SharedPreferences.getInstance();
+  final userId = prefs.getString("user_id");
+
+  runApp(MyApp(
+    initialRoute: userId == null ? "/login" : "/",
+  ));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  final String initialRoute;
+
+  const MyApp({required this.initialRoute, Key? key}) : super(key: key);
 
   // This widget is the root of your application.
   @override
@@ -47,7 +56,11 @@ class MyApp extends StatelessWidget {
       cupertino: (_, __) => CupertinoAppData(
         theme: LIGHT_THEME_CUPERTINO,
       ),
-      home: const ChallengeScreen(),
+      routes: {
+        "/": (_) => const LoginScreen(),
+        "/challenge": (_) => const ChallengeScreen(),
+      },
+      initialRoute: initialRoute,
     );
   }
 }
