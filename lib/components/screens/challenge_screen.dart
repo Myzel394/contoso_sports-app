@@ -216,7 +216,10 @@ class _ChallengeScreenState extends State<ChallengeScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const SizedBox(height: 32),
+            PlatformWidget(
+              material: (_, __) => SizedBox(height: 32),
+              cupertino: (_, __) => SizedBox(height: 120),
+            ),
             Text(
               "New Challenges for you",
               style: getTitleTextStyle(context),

@@ -58,6 +58,12 @@ class ProfileBar extends StatelessWidget {
         leading: SizedBox(
           width: 50,
           height: 50,
+          child: Material(
+            child: AvatarView(
+              avatarType: AvatarType.CIRCLE,
+              imagePath: user.picturePath,
+            ),
+          ),
         ),
         trailing: Wrap(
           direction: Axis.horizontal,
