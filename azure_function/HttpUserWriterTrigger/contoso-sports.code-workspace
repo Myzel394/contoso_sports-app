@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "../contoso-sports"
+		},
+		{
+			"name": "Hackathon",
+			"path": ".."
+		}
+	],
+	"settings": {
+		"debug.internalConsoleOptions": "neverOpen"
+	}
+}
