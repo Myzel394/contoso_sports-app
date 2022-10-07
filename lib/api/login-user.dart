@@ -12,12 +12,14 @@ Future<void> loginUser(
   final DateTime birthDate,
 ) async {
   final response = await http.post(
-    Uri.parse("https://contoso-sports-app.azurewebsites.net/api/user/create"
-        "/$firstName"
-        "/$lastName"
-        "/$nickname"
-        "/$gender"
-        "/${birthDate.toIso8601String()}"),
+    Uri.parse(
+      "https://contoso-sports-app.azurewebsites.net/api/user/create"
+      "/$firstName"
+      "/$lastName"
+      "/$nickname"
+      "/$gender"
+      "/${birthDate.toIso8601String()}",
+    ),
   );
 
   final data = jsonDecode(response.body);

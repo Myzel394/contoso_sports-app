@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:avatar_view/avatar_view.dart';
 import 'package:contoso_sports/utils/theme.dart';
 import 'package:cupertino_list_tile/cupertino_list_tile.dart';
@@ -34,7 +32,10 @@ class ProfileBar extends StatelessWidget {
               direction: Axis.horizontal,
               crossAxisAlignment: WrapCrossAlignment.center,
               children: [
-                Text(Random.secure().nextInt(900).toString()),
+                Text(
+                  user.nChallenges.toString(),
+                  style: getBodyTextTextStyle(context),
+                ),
                 const SizedBox(width: 4),
                 Icon(Icons.flag),
               ],
@@ -44,7 +45,10 @@ class ProfileBar extends StatelessWidget {
               direction: Axis.horizontal,
               crossAxisAlignment: WrapCrossAlignment.center,
               children: [
-                Text(Random.secure().nextInt(900).toString()),
+                Text(
+                  user.points.toString(),
+                  style: getBodyTextTextStyle(context),
+                ),
                 const SizedBox(width: 4),
                 Icon(Icons.star, color: Color(0xFFFFD300)),
               ],
@@ -73,7 +77,7 @@ class ProfileBar extends StatelessWidget {
               crossAxisAlignment: WrapCrossAlignment.center,
               children: [
                 Text(
-                  Random.secure().nextInt(900).toString(),
+                  user.nChallenges.toString(),
                   style: getBodyTextTextStyle(context),
                 ),
                 const SizedBox(width: 4),
@@ -86,7 +90,7 @@ class ProfileBar extends StatelessWidget {
               crossAxisAlignment: WrapCrossAlignment.center,
               children: [
                 Text(
-                  Random.secure().nextInt(900).toString(),
+                  user.points.toString(),
                   style: getBodyTextTextStyle(context),
                 ),
                 const SizedBox(width: 4),

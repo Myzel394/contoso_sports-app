@@ -46,6 +46,7 @@ class Challenge {
         lastName: "Schmitt",
         nickname: "Eydam",
         picturePath: "",
+        points: 0,
       ),
     );
   }

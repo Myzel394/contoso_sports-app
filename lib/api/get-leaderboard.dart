@@ -3,7 +3,9 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 
-Future<List<String>> getLeaderboard() async {
+import '../foreign_types/user.dart';
+
+Future<List<User>> getLeaderboard() async {
   final response = await http.get(
     Uri.parse(
         "https://contoso-sports-app.azurewebsites.net/api/leaderboard/global"),
@@ -12,8 +14,8 @@ Future<List<String>> getLeaderboard() async {
   final data = jsonDecode(response.body);
 
   return [
-    data["First"],
-    data["Second"],
-    data["Third"],
+    User.fromJSON(data["First"]),
+    User.fromJSON(data["Second"]),
+    User.fromJSON(data["Third"]),
   ];
 }

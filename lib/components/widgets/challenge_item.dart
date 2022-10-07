@@ -1,3 +1,4 @@
+import 'package:contoso_sports/components/screens/challenge_detail_screen.dart';
 import 'package:contoso_sports/utils/show_notification.dart';
 import 'package:contoso_sports/utils/theme.dart';
 import 'package:flutter/material.dart';
@@ -27,8 +28,20 @@ class ChallengeItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => ChallengeDetailScreen(
+              challenge: challenge,
+            ),
+          ),
+        );
+      },
+      onLongPress: () {
         showNotification(
-            'Challenge: ${challenge.title}', challenge.description);
+          'Challenge: ${challenge.title}',
+          challenge.description,
+        );
       },
       child: Card(
         margin: EdgeInsets.all(15),

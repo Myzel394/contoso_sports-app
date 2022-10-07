@@ -1,4 +1,5 @@
 import 'package:contoso_sports/api/get-challenges.dart';
+import 'package:contoso_sports/api/get-leaderboard.dart';
 import 'package:contoso_sports/components/widgets/add_form.dart';
 import 'package:contoso_sports/components/widgets/modal_sheet.dart';
 import 'package:contoso_sports/utils/theme.dart';
@@ -9,73 +10,6 @@ import '../../foreign_types/challenge.dart';
 import '../../foreign_types/user.dart';
 import '../widgets/challenge_item.dart';
 import '../widgets/profile_bar.dart';
-
-final List<Challenge> CHALLENGES = [
-  Challenge(
-    id: "abc",
-    description: "Run with me as fast as you can!",
-    title: "Run 500 kilometers in one run",
-    difficulty: 9,
-    startDate: DateTime.now(),
-    endDate: DateTime.now().add(Duration(days: 2)),
-    points: 500,
-    tags: [],
-    imagePath: "assets/images/run.jpg",
-    user: User(
-      birthDate: DateTime.now(),
-      favoriteTags: [],
-      firstName: "Aaron",
-      gender: "M",
-      id: "abc",
-      lastName: "Schmitt",
-      nickname: "Eydam",
-      picturePath: "",
-    ),
-  ),
-  Challenge(
-    id: "abcddd",
-    description: "Be silent for a day",
-    title: "I'm speechless",
-    difficulty: 10,
-    startDate: DateTime.now(),
-    endDate: DateTime.now().add(Duration(days: 4)),
-    points: 50,
-    tags: [],
-    user: User(
-      birthDate: DateTime.now(),
-      favoriteTags: [],
-      firstName: "Aaron",
-      gender: "M",
-      id: "abc",
-      lastName: "Schmitt",
-      nickname: "Eydam",
-      picturePath: "",
-    ),
-  ),
-];
-
-final List<User> LEADERBOARD = [
-  User(
-    birthDate: DateTime.now(),
-    favoriteTags: [],
-    firstName: "Aaron",
-    gender: "M",
-    id: "abc",
-    lastName: "Schmitt",
-    nickname: "Eydam",
-    picturePath: "assets/images/erik.jpg",
-  ),
-  User(
-    birthDate: DateTime.now(),
-    favoriteTags: [],
-    firstName: "Howard",
-    gender: "M",
-    id: "abcd",
-    lastName: "Wollowitz",
-    nickname: "Eydam",
-    picturePath: "assets/images/omid.jpg",
-  ),
-];
 
 class ChallengeScreen extends StatefulWidget {
   const ChallengeScreen({Key? key}) : super(key: key);
@@ -103,6 +37,7 @@ class _ChallengeScreenState extends State<ChallengeScreen> {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {});
 
     queryChallenges();
+    queryLeaderboard();
   }
 
   void queryChallenges() async {
@@ -112,6 +47,16 @@ class _ChallengeScreenState extends State<ChallengeScreen> {
       challenges.clear();
 
       challenges.addAll(result);
+    });
+  }
+
+  void queryLeaderboard() async {
+    final result = await getLeaderboard();
+
+    setState(() {
+      leaderboard.clear();
+
+      leaderboard.addAll(result);
     });
   }
 
@@ -251,7 +196,7 @@ class _ChallengeScreenState extends State<ChallengeScreen> {
             const SizedBox(height: 8),
             Column(
               children: List<Widget>.from(
-                LEADERBOARD.map(
+                leaderboard.map(
                   (element) => ProfileBar(
                     user: element,
                     key: Key(element.id),
