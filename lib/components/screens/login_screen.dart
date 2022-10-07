@@ -30,35 +30,59 @@ class _LoginScreenState extends State<LoginScreen> {
                 style: getTitleTextStyle(context),
               ),
               const SizedBox(height: 32),
-              TextField(
+              PlatformTextField(
                 controller: firstNameController,
-                decoration: InputDecoration(
-                  icon: Icon(Icons.title),
-                  labelText: 'First Name',
+                material: (_, __) => MaterialTextFieldData(
+                  decoration: InputDecoration(
+                    icon: Icon(Icons.title),
+                    labelText: 'First Name',
+                  ),
+                ),
+                cupertino: (_, __) => CupertinoTextFieldData(
+                  placeholder: 'First Name',
+                  prefix: Icon(Icons.title),
                 ),
               ),
               const SizedBox(height: 16),
-              TextField(
+              PlatformTextField(
                 controller: lastNameController,
-                decoration: InputDecoration(
-                  icon: Icon(Icons.description),
-                  labelText: 'Last Name',
+                material: (_, __) => MaterialTextFieldData(
+                  decoration: InputDecoration(
+                    icon: Icon(Icons.description),
+                    labelText: 'Last Name',
+                  ),
+                ),
+                cupertino: (_, __) => CupertinoTextFieldData(
+                  placeholder: 'Last Name',
+                  prefix: Icon(Icons.description),
                 ),
               ),
               const SizedBox(height: 16),
-              TextField(
+              PlatformTextField(
                 controller: nickNameController,
-                decoration: InputDecoration(
-                  icon: Icon(Icons.account_circle),
-                  labelText: 'Nickname',
+                material: (_, __) => MaterialTextFieldData(
+                  decoration: InputDecoration(
+                    icon: Icon(Icons.account_circle),
+                    labelText: 'Nickname',
+                  ),
+                ),
+                cupertino: (_, __) => CupertinoTextFieldData(
+                  placeholder: 'Nickname',
+                  prefix: Icon(Icons.account_circle),
                 ),
               ),
               const SizedBox(height: 16),
-              TextField(
+              PlatformTextField(
                 controller: genderController,
-                decoration: InputDecoration(
-                  icon: Icon(Icons.female_rounded),
-                  labelText: 'Gender',
+                material: (_, __) => MaterialTextFieldData(
+                  decoration: InputDecoration(
+                    icon: Icon(Icons.female_rounded),
+                    labelText: 'Gender',
+                  ),
+                ),
+                cupertino: (_, __) => CupertinoTextFieldData(
+                  prefix: Icon(Icons.female_rounded),
+                  placeholder: "Gender",
                 ),
               ),
               const SizedBox(height: 32),

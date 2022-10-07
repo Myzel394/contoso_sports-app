@@ -1,5 +1,6 @@
 import 'package:contoso_sports/api/add-challenge.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 import '../../utils/theme.dart';
 
@@ -40,35 +41,43 @@ class _AddFormState extends State<AddForm> {
           style: getTitleTextStyle(context),
         ),
         const SizedBox(height: 22),
-        TextField(
+        PlatformTextField(
           controller: titleController,
-          decoration: InputDecoration(
-            icon: Icon(Icons.title),
-            labelText: 'Title',
+          material: (_, __) => MaterialTextFieldData(
+            decoration: InputDecoration(
+              icon: Icon(Icons.title),
+              labelText: 'Title',
+            ),
           ),
         ),
         const SizedBox(height: 16),
-        TextField(
+        PlatformTextField(
           controller: descriptionController,
-          decoration: InputDecoration(
-            icon: Icon(Icons.description),
-            labelText: 'Description',
+          material: (_, __) => MaterialTextFieldData(
+            decoration: InputDecoration(
+              icon: Icon(Icons.description),
+              labelText: 'Description',
+            ),
           ),
         ),
         const SizedBox(height: 16),
-        TextField(
+        PlatformTextField(
           controller: difficultyController,
-          decoration: InputDecoration(
-            icon: Icon(Icons.ac_unit),
-            labelText: 'Difficulty',
+          material: (_, __) => MaterialTextFieldData(
+            decoration: InputDecoration(
+              icon: Icon(Icons.ac_unit),
+              labelText: 'Difficulty',
+            ),
           ),
         ),
         const SizedBox(height: 16),
-        TextField(
+        PlatformTextField(
           controller: pointsController,
-          decoration: InputDecoration(
-            icon: Icon(Icons.star),
-            labelText: 'Points',
+          material: (_, __) => MaterialTextFieldData(
+            decoration: InputDecoration(
+              icon: Icon(Icons.star),
+              labelText: 'Points',
+            ),
           ),
         ),
         const SizedBox(height: 16),

@@ -74,7 +74,7 @@ class _ChallengeScreenState extends State<ChallengeScreen> {
       child: PlatformScaffold(
         appBar: PlatformAppBar(
           title: isSearching
-              ? TextField(
+              ? PlatformTextField(
                   controller: searchController,
                 )
               : const Text("Challenges"),
