@@ -139,8 +139,8 @@ class _ChallengeScreenState extends State<ChallengeScreen> {
             icon: ClipRRect(
               borderRadius: BorderRadius.circular(5),
               child: Container(
-                width: 40,
-                height: 40,
+                width: 50,
+                height: 50,
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     image: NetworkImage(
