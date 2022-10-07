@@ -60,7 +60,6 @@ class ChallengeItem extends StatelessWidget {
                     textAlign: TextAlign.center,
                     style: getTitleTextStyle(context).copyWith(
                       fontWeight: FontWeight.bold,
-                      color: Color(0xFF222222),
                       fontSize: 26,
                     ),
                   ),
@@ -77,7 +76,7 @@ class ChallengeItem extends StatelessWidget {
                     children: <Widget>[
                       Icon(
                         Icons.date_range_rounded,
-                        color: Color(0xFF666666),
+                        color: getCaptionTextStyle(context).color,
                         size: 22,
                       ),
                       const SizedBox(width: 4),
@@ -93,8 +92,11 @@ class ChallengeItem extends StatelessWidget {
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-                      Icon(Icons.show_chart,
-                          color: Color(0xFF666666), size: 22),
+                      Icon(
+                        Icons.show_chart,
+                        color: getCaptionTextStyle(context).color,
+                        size: 22,
+                      ),
                       const SizedBox(width: 4),
                       Text(
                         challenge.endDate.toIso8601String(),

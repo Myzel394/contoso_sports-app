@@ -20,4 +20,17 @@ class User {
     required this.favoriteTags,
     required this.picturePath,
   });
+
+  static User fromJSON(data) {
+    return User(
+      firstName: data["firstName"],
+      lastName: data["lastName"],
+      nickname: data["nickname"],
+      id: data["id"],
+      gender: data["gender"],
+      birthDate: DateTime.parse(data["birthDate"]),
+      picturePath: "assets/images/erik.jpg",
+      favoriteTags: [],
+    );
+  }
 }

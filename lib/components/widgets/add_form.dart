@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../utils/theme.dart';
+
 class AddForm extends StatefulWidget {
   final VoidCallback onClose;
 
@@ -17,44 +19,52 @@ class _AddFormState extends State<AddForm> {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            const Text('Add Challenge'),
-            IconButton(
-              icon: const Icon(Icons.close),
-              onPressed: widget.onClose,
-            ),
-          ],
+        Text(
+          'Add Challenge',
+          style: getTitleTextStyle(context),
         ),
-        const SizedBox(height: 16),
-        TextField(
-          decoration: const InputDecoration(
+        const SizedBox(height: 22),
+        const TextField(
+          decoration: InputDecoration(
+            icon: Icon(Icons.title),
             labelText: 'Title',
           ),
         ),
         const SizedBox(height: 16),
-        TextField(
-          decoration: const InputDecoration(
+        const TextField(
+          decoration: InputDecoration(
+            icon: Icon(Icons.description),
             labelText: 'Description',
           ),
         ),
         const SizedBox(height: 16),
-        TextField(
-          decoration: const InputDecoration(
+        const TextField(
+          decoration: InputDecoration(
+            icon: Icon(Icons.ac_unit),
             labelText: 'Difficulty',
           ),
         ),
         const SizedBox(height: 16),
-        TextField(
-          decoration: const InputDecoration(
+        const TextField(
+          decoration: InputDecoration(
+            icon: Icon(Icons.star),
             labelText: 'Points',
           ),
         ),
         const SizedBox(height: 16),
-        ElevatedButton(
-          onPressed: () {},
-          child: const Text('Add'),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            TextButton(
+              onPressed: widget.onClose,
+              child: const Text('Cancel'),
+            ),
+            const SizedBox(width: 16),
+            ElevatedButton(
+              onPressed: () {},
+              child: const Text('Add'),
+            ),
+          ],
         ),
       ],
     );

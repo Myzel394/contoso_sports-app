@@ -1,6 +1,7 @@
 import 'package:contoso_sports/api/get-challenges.dart';
 import 'package:contoso_sports/components/widgets/add_form.dart';
 import 'package:contoso_sports/components/widgets/modal_sheet.dart';
+import 'package:contoso_sports/utils/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
@@ -89,6 +90,7 @@ class _ChallengeScreenState extends State<ChallengeScreen> {
     text: "",
   );
   final List<Challenge> challenges = [];
+  final List<User> leaderboard = [];
 
   @override
   void initState() {
@@ -122,16 +124,16 @@ class _ChallengeScreenState extends State<ChallengeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
+    return PlatformScaffold(
+      appBar: PlatformAppBar(
         title: isSearching
             ? TextField(
                 controller: searchController,
               )
             : Text("Challenges"),
-        actions: [
+        trailingActions: [
           isSearching
-              ? IconButton(
+              ? PlatformIconButton(
                   icon: Icon(Icons.cancel),
                   onPressed: () {
                     setState(() {
@@ -141,7 +143,7 @@ class _ChallengeScreenState extends State<ChallengeScreen> {
                     searchController.text = "";
                   },
                 )
-              : IconButton(
+              : PlatformIconButton(
                   icon: Icon(Icons.search),
                   onPressed: () => setState(() {
                     isSearching = true;
@@ -149,11 +151,29 @@ class _ChallengeScreenState extends State<ChallengeScreen> {
                 ),
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        onTap: (index) {
+      bottomNavBar: PlatformNavBar(
+        itemChanged: (index) {
           if (index == 1) {
             showPlatformModalSheet(
               context: context,
+              material: MaterialModalSheetData(
+                isDismissible: true,
+                enableDrag: true,
+                isScrollControlled: true,
+                backgroundColor: getSheetColor(context),
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(32),
+                    topRight: Radius.circular(32),
+                    bottomLeft: Radius.zero,
+                    bottomRight: Radius.zero,
+                  ),
+                ),
+              ),
+              cupertino: CupertinoModalSheetData(
+                barrierDismissible: true,
+                semanticsDismissible: true,
+              ),
               builder: (buildContext) => ModalSheet(
                 child: AddForm(
                   onClose: () => Navigator.pop(buildContext),
@@ -193,8 +213,13 @@ class _ChallengeScreenState extends State<ChallengeScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
+            const SizedBox(height: 32),
+            Text(
+              "New Challenges for you",
+              style: getTitleTextStyle(context),
+            ),
             SizedBox(
-              height: 500,
+              height: 260,
               child: ListView(
                 scrollDirection: Axis.horizontal,
                 shrinkWrap: true,

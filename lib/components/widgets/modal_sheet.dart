@@ -12,22 +12,25 @@ class ModalSheet extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(16),
-          topRight: Radius.circular(16),
+          topLeft: Radius.circular(32),
+          topRight: Radius.circular(32),
         ),
         color: getSheetColor(context),
       ),
       child: SingleChildScrollView(
-        padding: const EdgeInsets.only(
-          top: 16,
-          left: 8,
-          right: 8,
+        padding: EdgeInsets.only(
+          top: 32,
+          left: 16,
+          right: 16,
           bottom: 4,
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             child,
+            SizedBox(
+              height: MediaQuery.of(context).viewInsets.bottom,
+            ),
           ],
         ),
       ),
