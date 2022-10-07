@@ -1,0 +1,10 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "",
+    "FUNCTIONS_WORKER_RUNTIME": "python"
+  },
+  "ConnectionStrings": {
+    "AzureCosmosDBConnectionString": "AccountEndpoint=https://contoso-sports.documents.azure.com:443/;AccountKey=J4MAD8RLEm2lMvITGHjmYh183LLMoBNs3cZ8dOsXM1HK3pWemoyHcrB8XHwRShBmNEBuEWwXfeqGlWR8P8xmnQ==;"
+  }
+}
